@@ -1,0 +1,36 @@
+version: '3.4'
+
+services:
+  customers:
+    image: brucekruger/ecommerceapicustomers:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80/http"
+
+  orders:
+    image: brucekruger/ecommerceapiorders:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80/http"
+
+
+  products:
+    image: brucekruger/ecommerceapiproducts:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80/http"
+
+
+  search:
+    image: brucekruger/ecommerceapisearch:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - SERVICES__PRODUCTS=http://10.0.0.4:19081/lil/products/
+      - SERVICES__CUSTOMERS=http://10.0.0.4:19081/lil/customers/
+      - SERVICES__ORDERS=http://10.0.0.4:19081/lil/orders/
+    ports:
+      - "6004:80"
+
